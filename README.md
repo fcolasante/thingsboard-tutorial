@@ -11,7 +11,7 @@ Ports:
 - `1883`: MQTT broker
 
 ## Account access
-(link)[https://thingsboard.io/docs/samples/demo-account/]
+[link](https://thingsboard.io/docs/samples/demo-account/)
 
 - Tenant administrator: provision customer, device, things
 - Sysadmin (sysadmin)
@@ -30,7 +30,7 @@ https://thingsboard.io/docs/reference/mqtt-api/
 sudo apt install mosquitto mosquitto-cSlients
 export ACCESS_TOKEN='A1_TEST_TOKEN'
 ```
-Download file (or write yourself)
+Download file *(or write yourself)*
 ```s
 mosquitto_pub -d -h "127.0.0.1" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -f "telemetry-data-as-object.json"
 ```
@@ -57,10 +57,11 @@ otherwise I can just swap `mqtt` binding port on docker command.
 https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial
 
 ## Digital Ocean
-50$ from Education Github ad (link)[https://education.github.com/pack/offers#digitalocean]
+Get your 50$ from Education Github ad [link](https://education.github.com/pack/offers#digitalocean)
 
 ### PubIP
-(Public access)[http://64.227.26.128:8080]
+[Public access](http://64.227.26.128:8080)
+
 https://thingsboard.io/docs/user-guide/install/digital-ocean/
 https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
 https://thingsboard.io/docs/user-guide/install/ubuntu/
