@@ -1,14 +1,20 @@
 # Thingsboard Tutorial
 In this repository I will create a cloud-based IoT system that collects information from a set of virtual environmental sensors using the MQTT protocol. I will also create a simple web site to display the data collected from the sensors.
 
-## Docker
+## Thingsboard
+I will create 2 different setup
+- on premise: using **Docker**
+- cloud: using **Digital Ocean**
+
+### Docker
 ```s
 docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres
 ```
 
 Ports:
-- `9090`: Admin panel
-- `1883`: MQTT broker
+- Admin Panel: `-p 9090:9090` - connect local port 9090 to exposed internal HTTP port 9090
+- MQTT Broker: `-p 1883:1883` - connect local port 1883 to exposed internal MQTT port 1883
+- CoAP Gateway: `-p 5683:5683` - connect local port 5683 to exposed internal COAP port 5683
 
 ## Account access
 [link](https://thingsboard.io/docs/samples/demo-account/)
@@ -25,7 +31,9 @@ Ports:
 https://thingsboard.io/docs/reference/mqtt-api/
 ```
 
-## Mosquitto
+### Mosquitto
+I used Mosquitto_pub to test wheather MQTT broker works. Once I have tested it, I stopped the `mosquitto` service. Otherwise, the `1883` port remains used by Mosquitto. 
+
 ```s
 sudo apt install mosquitto mosquitto-cSlients
 export ACCESS_TOKEN='A1_TEST_TOKEN'
@@ -59,11 +67,12 @@ https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial
 ## Digital Ocean
 Get your 50$ from Education Github ad [link](https://education.github.com/pack/offers#digitalocean)
 
-### PubIP
+### Public IP
 [Public access](http://64.227.26.128:8080)
 
-https://thingsboard.io/docs/user-guide/install/digital-ocean/
-https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
-https://thingsboard.io/docs/user-guide/install/ubuntu/
+### How to setup Thingsboard on Digital Ocean
+1. https://thingsboard.io/docs/user-guide/install/digital-ocean/
+2. https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
+3. https://thingsboard.io/docs/user-guide/install/ubuntu/
 
 

@@ -18,7 +18,7 @@ MIN_RAIN_HEIGHT = 0
 MAX_RAIN_HEIGHT = 50
 
 city="Guardiagrele"
-Production = False
+Production = True
 if Production:
 	IP= '64.227.26.128'
 	sleep_time = 5
@@ -65,9 +65,9 @@ client.loop_start()
 
 while True:
 	
-	response = requests.get('https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric'.format(city, OPEN_WEATHER_TOKEN))
-	weather_data = response.json()
-	print(weather_data)
+	#response = requests.get('https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric'.format(city, OPEN_WEATHER_TOKEN))
+	#weather_data = response.json()
+	#print(weather_data)
 	data = {"temperature": randint(MIN_TEMPERATURE, MAX_TEMPERATURE),
 		"humidity": randint(MIN_HUMIDITY, MAX_HUMIDITY), 
 		"wind_direction": randint(MIN_WIND_DIRECTION, MAX_WIND_DIRECTION),
