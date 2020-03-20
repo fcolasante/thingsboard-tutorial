@@ -5,7 +5,7 @@ import requests
 import json
 
 ACCESS_TOKEN = "A1_TEST_TOKEN"
-OPEN_WEATHER_TOKEN = '7fc6a1ef81de8b2c08260ed791b45032'
+OPEN_WEATHER_TOKEN = 'TOCHANGE'
 MIN_TEMPERATURE = -50
 MAX_TEMPERATURE = 50
 MIN_HUMIDITY = 0
@@ -18,7 +18,7 @@ MIN_RAIN_HEIGHT = 0
 MAX_RAIN_HEIGHT = 50
 
 city="Guardiagrele"
-Production = True
+Production = fALSE
 if Production:
 	IP= '64.227.26.128'
 	sleep_time = 5

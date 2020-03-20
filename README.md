@@ -10,8 +10,15 @@ Ports:
 - `9090`: Admin panel
 - `1883`: MQTT broker
 
-## Access
-- Tenant administrator: provision customer, device, things.s
+## Account access
+(link)[https://thingsboard.io/docs/samples/demo-account/]
+
+- Tenant administrator: provision customer, device, things
+- Sysadmin (sysadmin)
+- Tenants
+- Users
+- Customers
+
 ## MQTT Api
 
 ```s
@@ -53,7 +60,7 @@ https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial
 50$ from Education Github ad (link)[https://education.github.com/pack/offers#digitalocean]
 
 ### PubIP
-64.227.26.128
+(Public access)[http://64.227.26.128:8080]
 https://thingsboard.io/docs/user-guide/install/digital-ocean/
 https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
 https://thingsboard.io/docs/user-guide/install/ubuntu/
