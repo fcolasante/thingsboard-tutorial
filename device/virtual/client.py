@@ -27,7 +27,7 @@ client.on_message = on_message
 client.connect("127.0.0.1", 1883, 60)
 
 
-data = {"temperature":"20", "humidity":"70"}
+data = {"temperature":30, "humidity": 80, "wind_direction": 190,"wind_intensity": 96, "rain_height": 38}
 
 client.loop_start()
 
