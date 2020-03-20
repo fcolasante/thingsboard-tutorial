@@ -18,7 +18,7 @@ MIN_RAIN_HEIGHT = 0
 MAX_RAIN_HEIGHT = 50
 
 city="Guardiagrele"
-Production = fALSE
+Production = False
 if Production:
 	IP= '64.227.26.128'
 	sleep_time = 5
