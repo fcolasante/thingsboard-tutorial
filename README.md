@@ -25,7 +25,7 @@ Ports:
 - Users
 - Customers
 
-## MQTT Api
+## MQTT API
 
 ```s
 https://thingsboard.io/docs/reference/mqtt-api/

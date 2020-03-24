@@ -3,9 +3,11 @@ import time
 from random import randint
 import requests
 import json
+from secrets import getOpenWeatherToken, getDeviceToken
 
-ACCESS_TOKEN = "ydQ93yxaY5s8jGXjfUga"
-OPEN_WEATHER_TOKEN = '7fc6a1ef81de8b2c08260ed791b45032'
+ACCESS_TOKEN = getDeviceToken(1)
+PUBLIC_IP = '64.227.26.128'
+OPEN_WEATHER_TOKEN = getOpenWeatherToken()
 MIN_TEMPERATURE = -50
 MAX_TEMPERATURE = 50
 MIN_HUMIDITY = 0
@@ -18,9 +20,9 @@ MIN_RAIN_HEIGHT = 0
 MAX_RAIN_HEIGHT = 50
 
 city="Guardiagrele"
-Production = False
+Production = True
 if Production:
-	IP= '64.227.26.128'
+	IP= PUBLIC_IP
 	sleep_time = 5
 else:
 	IP= '127.0.0.1'
