@@ -107,7 +107,7 @@ To run different devices you need to edit `getDeviceToken`.
 *I choose to not enter the token by the keyboard because it is not user-friendly and you should copy it every time.*
 
 ### Fake Iot Asset
-In order to run a **set of devices** on the same script, run `fake-asset.py`. You have to configure the array `CITIES` into the file `secrets.py`. 
+In order to run a **set of devices** on the same script, run `fake-asset.py`. You have to configure the array `CITIES` into the file `secrets.py`. *The example below does not work,it is for illustration purposes only, tokens are invented*.
 
 ```python
 CITIES = [['V12mMG95NmrJ8Wu4asd', 'Chieti'],
@@ -116,7 +116,7 @@ CITIES = [['V12mMG95NmrJ8Wu4asd', 'Chieti'],
             ['qZdNlOVhuMKf7fRasdf', 'Teramo']
         ]
 ```
-The first element represents the `ACCESS TOKEN` of the corresponding thingsboard device, the second element is used by the **OpenWheater API** to fetch real environmental data.
+The first element represents the `ACCESS TOKEN` of the corresponding thingsboard device, the second element is used by the **OpenWheater API** to fetch real environmental data of the `CITY`.
 ```shell
 python3 fake-asset.py
 ```
@@ -131,11 +131,11 @@ In order to **setup Thingsborad on Digital Ocean** follow this steps:
 3. https://thingsboard.io/docs/user-guide/install/ubuntu/
 
 ### Public IP
-[Public access](http://64.227.26.128:8080)
+You can access on my Thingsboard solution hosted on Digital Ocean Droplet by this [Public IP](http://64.227.26.128:8080). The pubblic credentials are: 
 - Email: `customer@thingsboard.org`
 - Password: `customer`
 
 ## Video and Article
-
+Read my article and see the video in order to have a better view of this project.
 - [YouTube video](https://youtu.be/jm8vQPPjoS0)
 - [Medium article](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
