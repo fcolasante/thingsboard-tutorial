@@ -87,7 +87,7 @@ mv secrets.example.py secrets.py
 Update `secrets.py` setting `OPEN_WHEATER_API` and `ACCESS_TOKEN`. Each device should have a different `ACCESS_TOKEN`.
 Go to Thingsboard panel and **copy it**. 
 
-**N.B.**In order to simplify teacher's testing, I have  also versioned (for  a limited period) `mysecrets.py`. In order to rapidly deploy my configuration, launch:
+**N.B.** In order to simplify teacher's testing, I have  also versioned (for  a limited period) `mysecrets.py`. To rapidly deploy my configuration, launch:
 ```shell
 mv mysecrets.py secrets.py
 ```
@@ -96,14 +96,19 @@ In the `fake-iot-device.py` you can setup many parameters:
 - `Production`: if `True` data are pushed on `PUBLIC_IP` , otherwise it sends data to `localhost`.
 - `generate_data(openWeather=False)`:if `True` data are fetched by `OpenWeather API`, otherwise it produces 
 random data.
-- `sleep_time`: time between 2 different dat
+- `sleep_time`: time between 2 different telemetry datas.
 
 ```shell
 cd virtual
 python3 fake-iot-device.py
 ```
+You can check if it works accessing as customer (Email: *customer@thingsboard.org* Password: *customer*) visualizing **Dashboard demo**.
+To run different devices you need to edit `getDeviceToken`.
+*I choose to not enter the token by the keyboard because it is not user-friendly and you should copy it every time.*
+
 ### Fake Iot Asset
 In order to run a **set of devices** on the same script, run `fake-asset.py`. You have to configure the array `CITIES` into the file `secrets.py`. 
+
 ```python
 CITIES = [['V12mMG95NmrJ8Wu4asd', 'Chieti'],
             ['TldN65VTzMukZnAWasdf', 'Francavilla al Mare'],
@@ -115,6 +120,7 @@ The first element represents the `ACCESS TOKEN` of the corresponding thingsboard
 ```shell
 python3 fake-asset.py
 ```
+You can check if it works accessing as customer (Email: *customer@thingsboard.org* Password: *customer*) visualizing **Dashboard > Dati comuni abruzzesi**.
 
 ## Deploy on Digital Ocean
 Get your 50$ from Education Github ad [link](https://education.github.com/pack/offers#digitalocean)
