@@ -71,7 +71,7 @@ def generate_data(openWeather=False):
 client.loop_start()
 
 while True:
-	data = generate_data(True)
+	data = generate_data(False)
 	res = client.publish("v1/devices/me/telemetry", payload=str(data), qos=1)
 	print("Published telemetry:" + str(data))
 	print(res)

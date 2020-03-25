@@ -1,4 +1,4 @@
 device/device-env
 device/virtual/settings.py
 */__pycache__
-**/secrets.py
+**/secrets.pyS
