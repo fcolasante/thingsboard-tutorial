@@ -77,8 +77,9 @@ In the video, I show you how to:
 Moreover, it is mandatory to **change DEFAULT PASSWORD** if your solutions is online.
 
 ## Fake IoT device
-Install all dependencies, *I suggest you to use `venv`*:
+Clone this repositort and install all dependencies, *I suggest you to use `venv`*:
 ```
+git clone https://github.com/fcolasante/thingsboard-tutorial.git
 cd device
 pip install -r requirements.txt
 ```
@@ -96,7 +97,7 @@ python3 fake-iot-device.py
 ```
 ### Fake Iot Asset
 In order to run a **set of devices** on the same script, run `fake-asset.py`. You have to configure the array `CITIES` into the file `secrets.py`. 
-```shell
+```python
 CITIES = [['V12mMG95NmrJ8Wu4asd', 'Chieti'],
             ['TldN65VTzMukZnAWasdf', 'Francavilla al Mare'],
             ['ssWgp3cschyZJf3asdf', "L\'Aquila"],
