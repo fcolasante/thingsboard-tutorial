@@ -59,6 +59,23 @@ sudo service mosquitto stop
 ```
 otherwise I can just swap `mqtt` binding port on docker command.
 
+
+## Settings Thingsboard
+In order to have a clear vision of How Thingsboard works you can see this complete video: [link](https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial)
+
+it would have been impossible to briefly explain all the steps via *UI*, to complete the setup I **highly recommend you to see see my short video** on [YouTube](https://youtu.be/jm8vQPPjoS0).
+
+In the video, I show you how to:
+1. Create **device**
+2. Create **asset** and setup *Relations*
+3. Setup **Rule chains** : `Input -> Message Type Switch -> Post Telemetry -> Save Timeseries`
+4. setup **Entity aliases** used to Datasource into the widgets. 
+5. Create **dashboards** linked together
+6. Add **Widgets** into Dashboard
+7. Build custome **data-processing code** to manipulate data
+
+Moreover, it is mandatory to **change DEFAULT PASSWORD** if your solutions is online.
+
 ## Fake IoT device
 Install all dependencies, *I suggest you to use `venv`*:
 ```
@@ -68,7 +85,7 @@ pip install -r requirements.txt
 
 In the `fake-iot-device.py` you can setup many parameters:
 - `city`: to choose the OpenWheater city
-- `Production`: if `True` data are pushed on public ip, otherwise it sends data to localhost.
+- `Production`: if `True` data are pushed on `PUBLIC_IP` , otherwise it sends data to `localhost`.
 - `generate_data(openWeather=False)`:if `True` data are fetched by `OpenWeather API`, otherwise it produces 
 random data.
 - `sleep_time`: time between 2 different dat
@@ -90,11 +107,6 @@ The first element represents the `ACCESS TOKEN` of the corresponding thingsboard
 ```shell
 python3 fake-asset.py
 ```
-
-## Settings Thingsboard
-In order to have a clear vision of How Thingsboard works you can see this complete video: [link](https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial)
-
-it would have been impossible to briefly explain all the steps via *UI*, to complete the setup I **highly recommend you to see see my short video** on [YouTube](https://youtu.be/jm8vQPPjoS0).
 
 ## Deploy on Digital Ocean
 Get your 50$ from Education Github ad [link](https://education.github.com/pack/offers#digitalocean)
