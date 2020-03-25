@@ -131,7 +131,7 @@ In order to **setup Thingsborad on Digital Ocean** follow this steps:
 3. https://thingsboard.io/docs/user-guide/install/ubuntu/
 
 ### Public IP
-You can access on my Thingsboard solution hosted on Digital Ocean Droplet by this [Public IP](http://64.227.26.128:8080). The pubblic credentials are: 
+You can access on my Thingsboard solution hosted on Digital Ocean Droplet by this [Public IP](http://64.227.26.128:8080). The public credentials are: 
 - Email: `customer@thingsboard.org`
 - Password: `customer`
 
