@@ -87,6 +87,10 @@ mv secrets.example.py secrets.py
 Update `secrets.py` setting `OPEN_WHEATER_API` and `ACCESS_TOKEN`. Each device should have a different `ACCESS_TOKEN`.
 Go to Thingsboard panel and **copy it**. 
 
+**N.B.**In order to simplify teacher's testing, I have  also versioned (for  a limited period) `mysecrets.py`. In order to rapidly deploy my configuration, launch:
+```shell
+mv mysecrets.py secrets.py
+```
 In the `fake-iot-device.py` you can setup many parameters:
 - `city`: to choose the OpenWheater city
 - `Production`: if `True` data are pushed on `PUBLIC_IP` , otherwise it sends data to `localhost`.
