@@ -2,7 +2,7 @@
 In this repository I will create a cloud-based IoT system that collects information from a set of virtual environmental sensors using the MQTT protocol. I will also create a simple web site to display the data collected from the sensors.
 
 ## Thingsboard
-I will create 2 different setup
+I will create 2 different setup:
 - on premise: using **Docker**
 - cloud: using **Digital Ocean**
 
@@ -19,11 +19,10 @@ Ports:
 ## Account access
 [link](https://thingsboard.io/docs/samples/demo-account/)
 
-- Tenant administrator: provision customer, device, things
-- Sysadmin (sysadmin)
-- Tenants
+- Sysadmin (sysadmin@thingsboard.org)
+- Tenants: provision customer, device, things (tenant@thingsboard.org)
 - Users
-- Customers
+- Customers: (customer@thingsboard.org)
 
 ## MQTT API
 
@@ -51,7 +50,7 @@ Parameters:
 ```
 
 
-## Restart
+## Restart Thingsboard container
 Check if ports is free:
 ```
 sudo netstat -tulpn | grep LISTEN
@@ -84,4 +83,7 @@ Get your 50$ from Education Github ad [link](https://education.github.com/pack/o
 2. https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
 3. https://thingsboard.io/docs/user-guide/install/ubuntu/
 
+## Video and Article
 
+- [YouTube video](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
+- [Medium article](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
