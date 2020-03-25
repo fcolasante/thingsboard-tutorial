@@ -3,27 +3,17 @@ import time
 from random import randint
 import requests
 import json
-from secrets import getOpenWeatherToken, getDeviceToken
+from secrets import getOpenWeatherToken, getDeviceToken, getCities, NUM_CITIES
+from settings import *
 
-ACCESS_TOKEN = getDeviceToken(1)
 PUBLIC_IP = '64.227.26.128'
 OPEN_WEATHER_TOKEN = getOpenWeatherToken()
-MIN_TEMPERATURE = -50
-MAX_TEMPERATURE = 50
-MIN_HUMIDITY = 0
-MAX_HUMIDITY = 100
-MIN_WIND_DIRECTION = 0
-MAX_WIND_DIRECTION = 360
-MIN_WIND_INTENSITY = 0
-MAX_WIND_INTENSITY = 100
-MIN_RAIN_HEIGHT = 0
-MAX_RAIN_HEIGHT = 50
+default_city="Guardiagrele"
 
-city="Guardiagrele"
 Production = True
 if Production:
 	IP= PUBLIC_IP
-	sleep_time = 60
+	sleep_time = 5
 else:
 	IP= '127.0.0.1'
 	sleep_time = 5
@@ -44,15 +34,7 @@ def on_publish(client,userdata,result):             #create function for callbac
     print("data published \n"+ result)
     pass
 
-client = mqtt.Client()
-client.username_pw_set(username=ACCESS_TOKEN)
-client.on_connect = on_connect
-client.on_message = on_message
-
-print("IP", IP)
-client.connect(IP, 1883, 60)
-
-def generate_data(openWeather=False):
+def generate_data(openWeather=False, city='Guardiagrele'):
 	if openWeather:
 		response = requests.get('https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric'.format(city, OPEN_WEATHER_TOKEN))
 		weather_data = response.json()
@@ -68,11 +50,24 @@ def generate_data(openWeather=False):
 				"wind_intensity": randint(MIN_WIND_INTENSITY, MAX_WIND_INTENSITY), 
 				"rain_height": randint(MIN_RAIN_HEIGHT, MAX_RAIN_HEIGHT)}
 	return data
-client.loop_start()
+
+print("IP", IP)
+client = [None]*NUM_CITIES
+
+for i in range(NUM_CITIES):
+    client[i] = mqtt.Client()
+    client[i].username_pw_set(username=getCities(i)[0])
+    client[i].on_connect = on_connect
+    client[i].on_message = on_message
+    client[i].connect(IP, 1883, 60)
+    client[i].loop_start()
+
 
 while True:
-	data = generate_data(False)
-	res = client.publish("v1/devices/me/telemetry", payload=str(data), qos=1)
-	print("Published telemetry:" + str(data))
-	print(res)
-	time.sleep(sleep_time)
+    time.sleep(sleep_time)
+    for i in range(NUM_CITIES):
+        print("Fetching data from {}".format( getCities(i)[1] ) )
+        data = generate_data(True, getCities(i)[1] )
+        res = client[i].publish("v1/devices/me/telemetry", payload=str(data), qos=1)
+        print("Published telemetry:" + str(data))
+        print(res)

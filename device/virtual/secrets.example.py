@@ -6,3 +6,4 @@ def getOpenWeatherToken():
 
 def getDeviceToken(id):
     return DEVICE_2_TOKEN
+

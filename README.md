@@ -2,11 +2,13 @@
 In this repository I will create a cloud-based IoT system that collects information from a set of virtual environmental sensors using the MQTT protocol. I will also create a simple web site to display the data collected from the sensors.
 
 ## Thingsboard
-I will create 2 different setup:
-- on premise: using **Docker**
-- cloud: using **Digital Ocean**
+I will create 2 different Thingsboard setup:
+- on premise: using **Docker** for development
+- on cloud: using **Digital Ocean** for production
 
-### Docker
+You have different user roles: sysadmin, tenant, user and customer. See this [link](https://thingsboard.io/docs/samples/demo-account/) to check default email and password
+
+## Docker
 ```s
 docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres
 ```
@@ -16,21 +18,14 @@ Ports:
 - MQTT Broker: `-p 1883:1883` - connect local port 1883 to exposed internal MQTT port 1883
 - CoAP Gateway: `-p 5683:5683` - connect local port 5683 to exposed internal COAP port 5683
 
-## Account access
-[link](https://thingsboard.io/docs/samples/demo-account/)
 
-- Sysadmin (sysadmin@thingsboard.org)
-- Tenants: provision customer, device, things (tenant@thingsboard.org)
-- Users
-- Customers: (customer@thingsboard.org)
-
-## MQTT API
+### MQTT API
 
 ```s
 https://thingsboard.io/docs/reference/mqtt-api/
 ```
 
-### Mosquitto
+#### Mosquitto
 I used Mosquitto_pub to test wheather MQTT broker works. Once I have tested it, I stopped the `mosquitto` service. Otherwise, the `1883` port remains used by Mosquitto. 
 
 ```s
@@ -49,8 +44,10 @@ Parameters:
            broker that supports MQTT v3.1. See also the --pw argument.
 ```
 
+After have tested that `mosquitto_pub` communicates with Thingsboard you can start to run your fake-iot-device. In this short tutorial is simply a small Python script.
 
-## Restart Thingsboard container
+
+### Restart Thingsboard container
 Check if ports is free:
 ```
 sudo netstat -tulpn | grep LISTEN
@@ -61,15 +58,20 @@ sudo service mosquitto stop
 ```
 otherwise I can just swap `mqtt` binding port on docker command.
 
-https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial
-
-## Virtual sensor
+## Fake IoT device
 In the `fake-iot-device.py` you can setup many parameters:
 - `city`: to choose the OpenWheater city
 - `Production`: if `True` data are pushed on public ip, otherwise it sends data to localhost.
 - `generate_data(openWeather=False)`:if `True` data are fetched by `OpenWeather API`, otherwise it produces 
 random data.
 - `sleep_time`: time between 2 different dat
+
+## Settings Thingsboard
+In order to have a clear vision of How Thingsboard works you can see this complete video: [link](https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial)
+
+To complete this tutorial, see my shorter video on [YouTube](https://youtu.be/jm8vQPPjoS0).
+it would have been impossible to briefly explain all the steps via UI, to continue the setup I highly recommend you to see [it](https://youtu.be/jm8vQPPjoS0).
+
 ## Digital Ocean
 Get your 50$ from Education Github ad [link](https://education.github.com/pack/offers#digitalocean)
 
@@ -85,5 +87,5 @@ Get your 50$ from Education Github ad [link](https://education.github.com/pack/o
 
 ## Video and Article
 
-- [YouTube video](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
+- [YouTube video](https://youtu.be/jm8vQPPjoS0)
 - [Medium article](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
