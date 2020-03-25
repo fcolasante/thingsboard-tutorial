@@ -64,11 +64,20 @@ otherwise I can just swap `mqtt` binding port on docker command.
 
 https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial
 
+## Virtual sensor
+In the `fake-iot-device.py` you can setup many parameters:
+- `city`: to choose the OpenWheater city
+- `Production`: if `True` data are pushed on public ip, otherwise it sends data to localhost.
+- `generate_data(openWeather=False)`:if `True` data are fetched by `OpenWeather API`, otherwise it produces 
+random data.
+- `sleep_time`: time between 2 different dat
 ## Digital Ocean
 Get your 50$ from Education Github ad [link](https://education.github.com/pack/offers#digitalocean)
 
 ### Public IP
 [Public access](http://64.227.26.128:8080)
+- Email: `customer@thingsboard.org`
+- Password: `customer`
 
 ### How to setup Thingsboard on Digital Ocean
 1. https://thingsboard.io/docs/user-guide/install/digital-ocean/
