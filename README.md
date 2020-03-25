@@ -69,10 +69,10 @@ In the video, I show you how to:
 1. Create **device**
 2. Create **asset** and setup *Relations*
 3. Setup **Rule chains** : `Input -> Message Type Switch -> Post Telemetry -> Save Timeseries`
-4. setup **Entity aliases** used to Datasource into the widgets. 
-5. Create **dashboards** linked together
+4. Setup **Entity aliases** used to Datasource into the widgets. 
+5. Create **dashboards** which are linked together
 6. Add **Widgets** into Dashboard
-7. Build custome **data-processing code** to manipulate data
+7. Build custom **data-processing code** to manipulate data
 
 Moreover, it is mandatory to **change DEFAULT PASSWORD** if your solutions is online.
 
@@ -99,7 +99,7 @@ In order to run a **set of devices** on the same script, run `fake-asset.py`. Yo
 ```shell
 CITIES = [['V12mMG95NmrJ8Wu4asd', 'Chieti'],
             ['TldN65VTzMukZnAWasdf', 'Francavilla al Mare'],
-            ['ssWgp3cschyZJf3asdf', 'L\'Aquila'],
+            ['ssWgp3cschyZJf3asdf', "L\'Aquila"],
             ['qZdNlOVhuMKf7fRasdf', 'Teramo']
         ]
 ```
