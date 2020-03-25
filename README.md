@@ -82,7 +82,10 @@ Clone this repositort and install all dependencies, *I suggest you to use `venv`
 git clone https://github.com/fcolasante/thingsboard-tutorial.git
 cd device
 pip install -r requirements.txt
+mv secrets.example.py secrets.py
 ```
+Update `secrets.py` setting `OPEN_WHEATER_API` and `ACCESS_TOKEN`. Each device should have a different `ACCESS_TOKEN`.
+Go to Thingsboard panel and **copy it**. 
 
 In the `fake-iot-device.py` you can setup many parameters:
 - `city`: to choose the OpenWheater city
