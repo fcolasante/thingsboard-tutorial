@@ -8,7 +8,7 @@ I will create 2 different Thingsboard setup:
 
 You have different user roles: sysadmin, tenant, user and customer. See this [link](https://thingsboard.io/docs/samples/demo-account/) to check default email and password
 
-## Docker
+## Installing Thingsboard using Docker
 ```s
 docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres
 ```
@@ -18,6 +18,7 @@ Ports:
 - MQTT Broker: `-p 1883:1883` - connect local port 1883 to exposed internal MQTT port 1883
 - CoAP Gateway: `-p 5683:5683` - connect local port 5683 to exposed internal COAP port 5683
 
+The complete guide is available at this [link](https://thingsboard.io/docs/user-guide/install/docker/)
 
 ### MQTT API
 
@@ -59,6 +60,12 @@ sudo service mosquitto stop
 otherwise I can just swap `mqtt` binding port on docker command.
 
 ## Fake IoT device
+Install all dependencies, *I suggest you to use `venv`*:
+```
+cd device
+pip install -r requirements.txt
+```
+
 In the `fake-iot-device.py` you can setup many parameters:
 - `city`: to choose the OpenWheater city
 - `Production`: if `True` data are pushed on public ip, otherwise it sends data to localhost.
@@ -66,24 +73,41 @@ In the `fake-iot-device.py` you can setup many parameters:
 random data.
 - `sleep_time`: time between 2 different dat
 
+```shell
+cd virtual
+python3 fake-iot-device.py
+```
+### Fake Iot Asset
+In order to run a **set of devices** on the same script, run `fake-asset.py`. You have to configure the array `CITIES` into the file `secrets.py`. 
+```shell
+CITIES = [['V12mMG95NmrJ8Wu4asd', 'Chieti'],
+            ['TldN65VTzMukZnAWasdf', 'Francavilla al Mare'],
+            ['ssWgp3cschyZJf3asdf', 'L\'Aquila'],
+            ['qZdNlOVhuMKf7fRasdf', 'Teramo']
+        ]
+```
+The first element represents the `ACCESS TOKEN` of the corresponding thingsboard device, the second element is used by the **OpenWheater API** to fetch real environmental data.
+```shell
+python3 fake-asset.py
+```
+
 ## Settings Thingsboard
 In order to have a clear vision of How Thingsboard works you can see this complete video: [link](https://thingsboard.io/docs/getting-started-guides/helloworld/#video-tutorial)
 
-To complete this tutorial, see my shorter video on [YouTube](https://youtu.be/jm8vQPPjoS0).
-it would have been impossible to briefly explain all the steps via UI, to continue the setup I highly recommend you to see [it](https://youtu.be/jm8vQPPjoS0).
+it would have been impossible to briefly explain all the steps via *UI*, to complete the setup I **highly recommend you to see see my short video** on [YouTube](https://youtu.be/jm8vQPPjoS0).
 
-## Digital Ocean
+## Deploy on Digital Ocean
 Get your 50$ from Education Github ad [link](https://education.github.com/pack/offers#digitalocean)
+In order to **setup Thingsborad on Digital Ocean** follow this steps:
+
+1. https://thingsboard.io/docs/user-guide/install/digital-ocean/
+2. https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
+3. https://thingsboard.io/docs/user-guide/install/ubuntu/
 
 ### Public IP
 [Public access](http://64.227.26.128:8080)
 - Email: `customer@thingsboard.org`
 - Password: `customer`
-
-### How to setup Thingsboard on Digital Ocean
-1. https://thingsboard.io/docs/user-guide/install/digital-ocean/
-2. https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
-3. https://thingsboard.io/docs/user-guide/install/ubuntu/
 
 ## Video and Article
 
