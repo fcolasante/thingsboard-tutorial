@@ -1,3 +1,4 @@
 device/device-env
 */__pycache__
 device/virtual/secrets.py
+**/bin
