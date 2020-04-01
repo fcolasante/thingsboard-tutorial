@@ -1,0 +1,6 @@
+[submodule "brokers/mosquitto.rsmb"]
+	path = brokers/mosquitto.rsmb
+	url = https://github.com/eclipse/mosquitto.rsmb.git
+[submodule "brokers/MQTTSN-Gateway/paho.mqtt-sn.embedded-c"]
+	path = brokers/MQTTSN-Gateway/paho.mqtt-sn.embedded-c
+	url = https://github.com/eclipse/paho.mqtt-sn.embedded-c
