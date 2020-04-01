@@ -54,8 +54,9 @@ Check if ports is free:
 sudo netstat -tulpn | grep LISTEN
 ```
 In my case I have been installed `mosquitto` hence I need to stop it.
-```
+```s
 sudo service mosquitto stop
+sudo kill -9 <PID>
 ```
 otherwise I can just swap `mqtt` binding port on docker command.
 

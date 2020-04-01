@@ -31,6 +31,16 @@ USEMODULE += ps
 # For testing we also include the ping6 command and some stats
 USEMODULE += gnrc_icmpv6_echo
 
+
+#TODO: test if it really works
+ifneq ($(BOARD), native)
+DRIVER ?= lps331ap
+USEMODULE += $(DRIVER)
+endif
+
+
+USEMODULE += saul_default #sensors 
+
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the
 # development process:

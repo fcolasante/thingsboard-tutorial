@@ -22,6 +22,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+
 
 #include "shell.h"
 #include "msg.h"
@@ -31,18 +33,30 @@
 #include "thread.h"
 #include "xtimer.h"
 
+#define SENSORS 0
+#define UNUSED(x) (void)(x)
+
+#if SENSORS
+#include "lps331ap.h"
+#include "lps331ap_params.h"
+#endif
+
 #define EMCUTE_PORT         (1883U)
 #define EMCUTE_ID           ("gertrud")
 #define EMCUTE_PRIO         (THREAD_PRIORITY_MAIN - 1)
 
 #define NUMOFSUBS           (16U)
 #define TOPIC_MAXLEN        (64U)
+#define TOPIC_STD           ("v1/gateway/telemetry")
+#define MSG_LEN             (128u) //CHECK
+#define MSG_PROTO           "{ '%s': [ { 'ts': %llu000, 'values':{'%s': %d }}]}"
 
 static char stack[THREAD_STACKSIZE_DEFAULT];
 static msg_t queue[8];
 
 static emcute_sub_t subscriptions[NUMOFSUBS];
 static char topics[NUMOFSUBS][TOPIC_MAXLEN];
+static char device_name[TOPIC_MAXLEN];
 
 static void *emcute_thread(void *arg)
 {
@@ -248,15 +262,11 @@ static int cmd_will(int argc, char **argv)
     puts("Successfully updated last will topic and message");
     return 0;
 }
-
+#if SENSORS
 void *thread_handler(void *arg)
 {
-    /* ... */
-    while(1){
-        printf("Time is %u\n", xtimer_now_usec());
-        xtimer_sleep(2);
-    }
-    (void)arg;
+    UNUSED(arg);
+    printf("Hello");    
     return NULL;
 }
 
@@ -270,21 +280,18 @@ static int cmd_pub_data(int argc, char ** argv){
         return 1;
     }
 
-    /* parse QoS level */
     if (argc >= 4) {
         flags |= get_qos(argv[3]);
     }
 
     printf("pub with topic: %s and name %s and flags 0x%02x\n", argv[1], argv[2], (int)flags);
 
-    /* step 1: get topic id */
     t.name = argv[1];
     if (emcute_reg(&t) != EMCUTE_OK) {
         puts("error: unable to obtain topic ID");
         return 1;
     }
 
-    /* step 2: publish data */
     if (emcute_pub(&t, argv[2], strlen(argv[2]), flags) != EMCUTE_OK) {
         printf("error: unable to publish data to topic '%s [%i]'\n",
                 t.name, (int)t.id);
@@ -298,13 +305,78 @@ static int cmd_pub_data(int argc, char ** argv){
     thread_create(stack, sizeof(stack),
                   THREAD_PRIORITY_MAIN - 1,
                   THREAD_CREATE_STACKTEST,
-                  thread_handler, NULL,
+                  thread_handler, argv,
                   "thread pub data");
     return 0;
 }
 
+static int cmd_sensors(int argc, char ** argv){
+    UNUSED(argc);
+    UNUSED(argv);
+    lps331ap_t dev;
+    printf("Initializing LPS331AP sensor\n");
+    if (lps331ap_init(&dev, &lps331ap_params[0]) == 0) {
+        puts("[OK]\n");
+    }else{
+        puts("Initialization failed");
+        return 1;
+    }
+
+    uint16_t pres;
+    int16_t temp;
+    temp = lps331ap_read_temp(&dev);
+    pres = lps331ap_read_pres(&dev);
+    int temp_abs = temp / 100;
+    temp -= temp_abs * 100;
+    printf("Pressure value: %ihPa - Temperature: %2i.%02i°C\n",
+               pres, temp_abs, temp);
+    
+    return 0;
+}
+#endif
 
 
+static int cmd_test(int argc, char ** argv){
+    UNUSED(argc);
+    UNUSED(argv);
+    emcute_topic_t t;
+    unsigned flags = EMCUTE_QOS_1;
+    t.name = TOPIC_STD;
+    if (emcute_reg(&t) != EMCUTE_OK) {
+        puts("error: unable to obtain topic ID");
+        return 1;
+    }
+    char buffer[MSG_LEN];
+    snprintf(buffer, MSG_LEN, MSG_PROTO, device_name, (unsigned long long int)time(NULL), "humidity", rand()%100);
+
+    if (emcute_pub(&t, buffer, strlen(buffer), flags) != EMCUTE_OK) {
+        printf("error: unable to publish data to topic '%s [%i]'\n",
+                t.name, (int)t.id);
+        return 1;
+    }
+
+    printf("Published %i bytes to topic '%s [%i] msg: %s'\n",
+            (int)strlen(buffer), t.name, t.id, buffer);
+
+    return 0;
+}
+
+static int cmd_timestamp(int argc, char ** argv){
+    UNUSED(argc); UNUSED(argv);
+    printf ( "Current local time and date: %llu000\n",(unsigned long long int)time(NULL));
+    return 0;
+}
+static int cmd_set_dev(int argc, char ** argv){
+    if (argc < 2) {
+        printf("usage: %s <device_name>\n",
+                argv[0]);
+        return 1;
+    }
+    printf("Dev name: %s\n", argv[1]);
+    strcpy(device_name, argv[1]);
+    printf("Setted: %s\n", device_name);
+    return 0;
+}
 static const shell_command_t shell_commands[] = {
     { "con", "connect to MQTT broker", cmd_con },
     { "discon", "disconnect from the current broker", cmd_discon },
@@ -312,7 +384,15 @@ static const shell_command_t shell_commands[] = {
     { "sub", "subscribe topic", cmd_sub },
     { "unsub", "unsubscribe from topic", cmd_unsub },
     { "will", "register a last will", cmd_will },
+    /*
+    #if SENSORS
     { "pub_data", "publish data continously on a new thread", cmd_pub_data},
+    { "sensors", "retrieve data sensors", cmd_sensors},
+    #endif
+    */
+    { "test", "publish default msg on default topic", cmd_test},
+    { "timestamp", "get current timestamp", cmd_timestamp},
+    { "set_device", "set device name", cmd_set_dev},
     { NULL, NULL, NULL }
 };
 

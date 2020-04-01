@@ -18,9 +18,17 @@ ifconfig 5 add fec0:affe::99
 con
 ```
 
-```
-
-```
+```S
 sudo netstat -ltup
 mosquitto_pub -d -h "127.0.0.1" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -f "telemetry-data-as-object.json"
+```
+
+
+# How to setup iot-lab
+
+Errors:
+SSH config:
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
 ```

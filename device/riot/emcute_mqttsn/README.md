@@ -83,9 +83,10 @@ below:
 ```s
 ifconfig 5 add fec0:affe::99
 con fec0:affe::1 1885
-pub v1/devices/me/telemetry "{'humidity':11}" 1
+pub v1/devices/me/telemetry "{'humidity':11}" 1 #no gateway
 pub v1/devices/me/telemetry "{'temperature':12}" 1
 ```
+
 
 To publish using Thingsboard Gateway:
 Setup Gateway in Mosquitto configuration: `token` and `topic`
@@ -111,6 +112,7 @@ pub data as :
 pub v1/gateway/telemetry "{ 'Device Villa Comunale': [ { 'ts': 1483228800000, 'values':{'temperature': 42 }}]}" 1 
 pub v1/gateway/telemetry "{ 'Device Villa Comunale': [ { 'ts': 1483228800000, 'values':{'humidity': 42 }}]}" 1 
 pub v1/gateway/telemetry "{ 'Device Piano': [ { 'ts': 1483228800000, 'values':{'humidity': 42 }}]}" 1 
+pub v1/gateway/telemetry "{ 'Device Piano': [ { 'ts': 1585744760000, 'values':{'humidity': 42 }}]}" 1 
 ```
 
 - To subscribe to a topic, run `sub` with the topic name as parameter, e.g.
@@ -124,3 +126,50 @@ pub hello/world "One more beer, please."
 ```
 
 That's it, happy publishing!
+
+## SETTING IOT-LAB
+
+```
+   eval "$(ssh-agent -s)"
+   ssh-add ~/.ssh/id_rsa
+```
+
+this command does not work
+```
+ifconfig 6 add 2001:660:3207:400::68
+```
+
+
+# Setting Local 
+0. Stop mosquitto service
+```
+sudo service mosquitto stop
+```
+1. Run docker thingsboard
+```s
+docker restart mytb
+```
+2. run mosquitto with custom configuration (ensure that `address=127.0.0.1`)
+```s
+cd gateway
+mosquitto -c bridge_gateway.cof
+```
+3. Run `MQTTSN-MQTT` Gateway
+```
+
+```
+
+
+# new
+BOREDR ROUUTER
+M3-106
+```
+iotlab-node --update examples/gnrc_border_router/bin/iotlab-m3/gnrc_border_router.elf -l saclay,m3,106
+sudo ethos_uhcpd.py m3-106 tap0 2001:660:5307:316a::1/64
+```
+
+M3-105
+```
+cd ~/A8/riot/RIOT/examples/my_firmware/bin/iotlab-m3
+iotlab-node --update emcute_mqttsn.elf -l grenoble,m3,105
+```
