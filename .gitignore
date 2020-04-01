@@ -2,3 +2,5 @@ device/device-env
 */__pycache__
 device/virtual/secrets.py
 **/bin
+brokers/MQTTSN-Gateway/*
+!brokers/MQTTSN-Gateway/custom_install.sh

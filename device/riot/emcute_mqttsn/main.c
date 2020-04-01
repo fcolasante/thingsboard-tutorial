@@ -384,12 +384,10 @@ static const shell_command_t shell_commands[] = {
     { "sub", "subscribe topic", cmd_sub },
     { "unsub", "unsubscribe from topic", cmd_unsub },
     { "will", "register a last will", cmd_will },
-    /*
     #if SENSORS
     { "pub_data", "publish data continously on a new thread", cmd_pub_data},
     { "sensors", "retrieve data sensors", cmd_sensors},
     #endif
-    */
     { "test", "publish default msg on default topic", cmd_test},
     { "timestamp", "get current timestamp", cmd_timestamp},
     { "set_device", "set device name", cmd_set_dev},
