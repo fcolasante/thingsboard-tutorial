@@ -1,5 +1,6 @@
-## About
+## How to setup a RIOT device 
 This application demonstrates the usage of the emCute (MQTT-SN) module in RIOT.
+
 
 ## Setup
 For using this example, two prerequisites have to be fullfilled:
@@ -151,14 +152,19 @@ docker restart mytb
 ```
 2. run mosquitto with custom configuration (ensure that `address=127.0.0.1`)
 ```s
-cd gateway
+cd brokers
 mosquitto -c bridge_gateway.cof
 ```
-3. Run `MQTTSN-MQTT` Gateway
+3. Setup `MQTTSN-MQTT` Gateway
+```s
+cd MQTTSN-Gateway
+mv gateway.conf gateway.conf.bkp
+cp ../conf/MQTTSN-Gateway.conf gateway.conf
 ```
-
+Run it
+```s
+./MQTTSN-Gateway
 ```
-
 
 # new
 BOREDR ROUUTER

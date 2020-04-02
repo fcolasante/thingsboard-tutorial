@@ -4,3 +4,4 @@ device/virtual/secrets.py
 **/bin
 brokers/MQTTSN-Gateway/*
 !brokers/MQTTSN-Gateway/custom_install.sh
+*.key
