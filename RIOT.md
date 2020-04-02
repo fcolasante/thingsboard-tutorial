@@ -24,11 +24,34 @@ mosquitto_pub -d -h "127.0.0.1" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" 
 ```
 
 
-# How to setup iot-lab
+# IoT-LAB
 
+1. Register to IoT-Lab
+2. Configure SSH Access [link](https://www.iot-lab.info/tutorials/ssh-access/). Just create a pair key and copy your public key into your IoT-lab profile.
+3. Follow this [tutorial](https://www.iot-lab.info/tutorials/riot-compilation/)
+
+My SSH credential is: 
+```s
+ssh colasant@grenoble.iot-lab.info
+```
+To build: *(into your SSH remote connection, after have configured as (3))*
+```sh
+source /opt/riot.source
+BOARD=iotlab-m3 make all
+```
+
+## IoT-LAB Networking example for M3 Nodes
+1. Connect to SSH
+2. Compible the firmware in remote (in your SSH connection)
+3. Copy the remote elf into your local pc. 
+```s
+scp colasant@grenoble.iot-lab.info:iot-lab/parts/RIOT/examples/gnrc_networking/bin/iotlab-m3/gnrc_networking.elf gnrc_networking.elf
+```
+
+# Issues
 Errors:
 SSH config:
-```
+```s
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ```

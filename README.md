@@ -144,7 +144,7 @@ Read my article and see the video in order to have a better view of this project
 
 # Next tutorial
 
-Check the next tutorial available at (link)[RIOT]. It provides
+Check the next tutorial available at [link](RIOT). It provides
 - riot firmware
 - MQTT-SN configuration
 - iot-lab hands-on

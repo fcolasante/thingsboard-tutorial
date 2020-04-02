@@ -27,7 +27,7 @@ Then we send from `riot` to external Linux application.
 
 Does not work the last part of the tutorial. 
 Sometimes does not work the binding port.
-```
+```s
 /media/frank/Dati/university/iot/hands-on/Tutorials/task-06/bin/native/Task06.elf tap0 
 RIOT native interrupts/signals initialized.
 LED_RED_OFF
@@ -57,7 +57,7 @@ You can have **transparent** or **aggregating** gateway.
 3. Follow this [tutorial](https://www.iot-lab.info/tutorials/riot-compilation/)
 
 My SSH credential is: 
-```sh
+```s
 ssh colasant@grenoble.iot-lab.info
 ```
 To build: *(into your SSH remote connection, after have configured as (3))*
@@ -77,7 +77,7 @@ scp colasant@grenoble.iot-lab.info:iot-lab/parts/RIOT/examples/gnrc_networking/b
 ## 15
 1. MQTT-SN Gateway: Install [MQTT-SN gateway](https://www.eclipse.org/paho/components/mqtt-sn-transparent-gateway/)
 If you have this error:
-```c
+```s
 src/linux/Network.h:24:10: fatal error: openssl/ssl.h: No such file or directory
  #include <openssl/ssl.h>
           ^~~~~~~~~~~~~~~
@@ -89,7 +89,7 @@ sudo apt-get install libssl-dev
 ```
 
 To run:
-```sh
+```s
 cd /media/frank/Dati/university/iot/hands-on/MQTTSNGateway
 sudo ./MQTT-SNGateway 
 ```
@@ -99,13 +99,12 @@ Create your RIOT project: *in my case I have just copied `emcute_mqttsn` in my f
 
 Now, you have to setup `gateway.conf` into `MQTTSNGateway`.
 
-```
+```s
 sudo ip a a fec0:affe::1/64 dev tapbr0
 ```
 
 Check CONNECTION:
-``` 
+``` s
 sudo netstat -ltup
 ```
 
-### Mosquitto sub
