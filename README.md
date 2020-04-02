@@ -140,3 +140,4 @@ You can access on my Thingsboard solution hosted on Digital Ocean Droplet by thi
 Read my article and see the video in order to have a better view of this project.
 - [YouTube video](https://youtu.be/jm8vQPPjoS0)
 - [Medium article](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
+
