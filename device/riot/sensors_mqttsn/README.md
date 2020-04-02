@@ -128,18 +128,6 @@ pub hello/world "One more beer, please."
 
 That's it, happy publishing!
 
-## SETTING IOT-LAB
-
-```
-   eval "$(ssh-agent -s)"
-   ssh-add ~/.ssh/id_rsa
-```
-
-this command does not work
-```
-ifconfig 6 add 2001:660:3207:400::68
-```
-
 
 # Setting Local 
 0. Stop mosquitto service
@@ -166,16 +154,14 @@ Run it
 ./MQTTSN-Gateway
 ```
 
-# new
-BOREDR ROUUTER
-M3-106
-```
+# Iot-Lab Networking
+BORDER ROUTER:
+```S
 iotlab-node --update examples/gnrc_border_router/bin/iotlab-m3/gnrc_border_router.elf -l saclay,m3,106
 sudo ethos_uhcpd.py m3-106 tap0 2001:660:5307:316a::1/64
 ```
 
-M3-105
-```
+```s
 cd ~/A8/riot/RIOT/examples/my_firmware/bin/iotlab-m3
 iotlab-node --update emcute_mqttsn.elf -l grenoble,m3,105
 ```

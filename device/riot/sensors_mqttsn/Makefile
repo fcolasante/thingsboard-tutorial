@@ -5,7 +5,8 @@ APPLICATION = sensors_mqttsn
 BOARD ?= native
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= /media/frank/Dati/university/iot/hands-on/Tutorials/RIOT
+#RIOTBASE ?= /media/frank/Dati/university/iot/hands-on/Tutorials/RIOT
+RIOTBASE ?= $(CURDIR)/../..
 
 BOARD_INSUFFICIENT_MEMORY := arduino-duemilanove arduino-mega2560 arduino-nano \
                              arduino-uno chronos hifive1 msb-430 msb-430h \

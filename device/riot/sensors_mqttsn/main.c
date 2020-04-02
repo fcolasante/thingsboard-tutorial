@@ -33,7 +33,7 @@
 #include "thread.h"
 #include "xtimer.h"
 
-#define SENSORS 0
+#define SENSORS 1
 #define UNUSED(x) (void)(x)
 
 #if SENSORS
@@ -48,9 +48,19 @@
 #define NUMOFSUBS           (16U)
 #define TOPIC_MAXLEN        (64U)
 #define TOPIC_STD           ("v1/gateway/telemetry")
-#define MSG_LEN             (128u) //CHECK
-#define MSG_PROTO           "{ '%s': [ { 'ts': %llu000, 'values':{'%s': %d } }]}"
+#define MSG_LEN             (512) //CHECK
+#define MSG_PROTO           "{ '%s': [ { 'ts': %llu000, 'values':{'%s': %d,'%s': %d,'%s': %d,'%s': %d,'%s': %d } }]}"
 
+#define MIN_TEMPERATURE -50
+#define MAX_TEMPERATURE 50
+#define MIN_HUMIDITY 0
+#define MAX_HUMIDITY 100
+#define MIN_WIND_DIRECTION 0
+#define MAX_WIND_DIRECTION 360
+#define MIN_WIND_INTENSITY 0
+#define MAX_WIND_INTENSITY 100
+#define MIN_RAIN_HEIGHT 0
+#define MAX_RAIN_HEIGHT 50
 static char stack[THREAD_STACKSIZE_DEFAULT];
 static msg_t queue[8];
 
@@ -291,7 +301,7 @@ static int cmd_sensors(int argc, char ** argv){
 #endif
 
 
-static int cmd_test(int argc, char ** argv){
+static int cmd_telemetry(int argc, char ** argv){
     UNUSED(argc);
     UNUSED(argv);
     emcute_topic_t t;
@@ -302,7 +312,13 @@ static int cmd_test(int argc, char ** argv){
         return 1;
     }
     char buffer[MSG_LEN];
-    snprintf(buffer, MSG_LEN, MSG_PROTO, device_name, (unsigned long long int)time(NULL), "humidity", rand()%100);
+    snprintf(buffer, MSG_LEN, MSG_PROTO, device_name, (unsigned long long int)time(NULL),
+                "temperature", rand() % (MAX_TEMPERATURE + 1 - MIN_TEMPERATURE) + MIN_TEMPERATURE,
+                "humidity", rand() % (MAX_HUMIDITY + 1 - MIN_HUMIDITY) + MIN_HUMIDITY,
+                "wind_direction", rand() % (MAX_WIND_DIRECTION + 1 - MIN_WIND_DIRECTION) + MIN_WIND_DIRECTION,
+                "wind_intensity", rand() % (MAX_WIND_INTENSITY + 1 - MIN_WIND_INTENSITY) + MIN_WIND_INTENSITY,
+                "rain_height", rand() % (MAX_RAIN_HEIGHT + 1 - MIN_RAIN_HEIGHT) + MIN_RAIN_HEIGHT
+            );
 
     if (emcute_pub(&t, buffer, strlen(buffer), flags) != EMCUTE_OK) {
         printf("error: unable to publish data to topic '%s [%i]'\n",
@@ -319,11 +335,9 @@ void *thread_handler(void *arg)
 {
     UNUSED(arg);
     while(1){
-        printf("Sensor: is %llu\n", xtimer_now64().ticks64);
+        printf("Time: %llu\n", xtimer_now64().ticks64);
         xtimer_sleep(5);
-        //cmd_test(0, NULL);
     }
-    (void)arg;
     return NULL;
 }
 
@@ -361,11 +375,11 @@ static const shell_command_t shell_commands[] = {
     { "sub", "subscribe topic", cmd_sub },
     { "unsub", "unsubscribe from topic", cmd_unsub },
     { "will", "register a last will", cmd_will },
-    { "pub_data", "publish data continously on a new thread", cmd_pub_data},
+    { "multi_thread", "print time continously on a new thread", cmd_pub_data},
     #if SENSORS
     { "sensors", "retrieve data sensors", cmd_sensors},
     #endif
-    { "test", "publish default msg on default topic", cmd_test},
+    { "pub_telemetry", "publish default msg on default topic", cmd_telemetry},
     { "timestamp", "get current timestamp", cmd_timestamp},
     { "set_device", "set device name", cmd_set_dev},
     { NULL, NULL, NULL }
