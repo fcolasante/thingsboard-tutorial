@@ -3,22 +3,24 @@
 - Watch my video on [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
 - Read my [article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
 
-
+## Architecture
+![IoT architecture with MQTT-SN](assets/architecture.png)
 1. Pull the repository:
 ```s
 git pull
 git submodule update --init --recursive
 ```
-2. Setup `RIOT`
+2. Setup `RIOT`. Follow the official [Getting Started](https://github.com/RIOT-OS/Tutorials/blob/master/README.md)
 
-2. Setup `RIOTBASE ?= ...` into `Makefile`
+
+3. Setup `RIOTBASE ?= ...` into `Makefile`
 
 ## Setup virtual network
 ```s
 cd device/riot/sensors_mqttsn
 ./start_network.sh
 ```
-Then, run the MQTT-SN transparent gatewat and the MQTT broker.
+Then, run the MQTT-SN transparent gateway and the MQTT broker.
 
 
 ## Run Gateway and broker
@@ -27,7 +29,7 @@ Then, run the MQTT-SN transparent gatewat and the MQTT broker.
 mosquitto -c brokers/conf/bridge_gateway_prod.conf 
 ```
 
-Firstly, setup custom `gateway.conf`file:
+Setup custom `gateway.conf`file:
 ```s
 cd brokers/MQTTSN-Gateway
 ./custom_install.sh
@@ -96,7 +98,7 @@ scp colasant@grenoble.iot-lab.info:iot-lab/parts/RIOT/examples/gnrc_networking/b
 
 # Issues
 Commonn errors:
-SSH config:
+- SSH configuration
 ```s
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
