@@ -1,15 +1,48 @@
-# Setting up RIOT and MQTTSN
+#  Build IoT device using RIOT-OS, MQTT and Thingsboard
 
-1. Clone `RIOT` repository
+- Watch my video on [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
+- Read my [article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
+
+
+1. Pull the repository:
+```s
+git pull
+git submodule update --init --recursive
+```
+2. Setup `RIOT`
+
 2. Setup `RIOTBASE ?= ...` into `Makefile`
 
-## Setup 
+## Setup virtual network
 ```s
 cd device/riot/sensors_mqttsn
 ./start_network.sh
 ```
+Then, run the MQTT-SN transparent gatewat and the MQTT broker.
 
-## Usage
+
+## Run Gateway and broker
+
+```s
+mosquitto -c brokers/conf/bridge_gateway_prod.conf 
+```
+
+Firstly, setup custom `gateway.conf`file:
+```s
+cd brokers/MQTTSN-Gateway
+./custom_install.sh
+mv gateway.conf gateway.conf.bkp
+cp ../conf/MQTTSN-Gateway.conf gateway.conf
+```
+
+Then, run the MQTT-SN transparent gateway:
+```s
+cd  brokers/MQTTSN-Gateway
+./MQTT-SNGateway
+```
+
+
+## RIOT Usage
 ```s
 PORT=tap0 make clean all term
 ```
@@ -24,6 +57,8 @@ pub_telemetry
 
 
 ### Other utilities
+
+This commands can be used for testing:
 ```s
 sudo netstat -ltup
 mosquitto_pub -d -h "127.0.0.1" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -f "telemetry-data-as-object.json"
@@ -60,7 +95,7 @@ scp colasant@grenoble.iot-lab.info:iot-lab/parts/RIOT/examples/gnrc_networking/b
 
 
 # Issues
-Errors:
+Commonn errors:
 SSH config:
 ```s
 eval "$(ssh-agent -s)"
