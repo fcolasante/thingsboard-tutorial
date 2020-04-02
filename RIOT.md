@@ -4,7 +4,9 @@
 - Read my [article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
 
 ## Architecture
-![IoT architecture with MQTT-SN](assets/architecture.png)
+![IoT architecture with MQTT-SN](assets/architecture.jpg)
+
+
 1. Pull the repository:
 ```s
 git pull
