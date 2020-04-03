@@ -27,7 +27,7 @@ Then, run the MQTT-SN transparent gateway and the MQTT broker.
 ## Run Gateway and broker
 
 ### Mosquitto as bridge
-Update `bridge_gateway_prof.conf` with your parameters and run int. You need to setup:
+Update `bridge_gateway_[dev|prod].conf` with your parameters and run it. You need to setup:
 - `address` 
 - `remote_username` 
 
@@ -87,15 +87,20 @@ mosquitto_pub -d -h "127.0.0.1" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" 
 3. Follow this [tutorial (riot-compilation)](https://www.iot-lab.info/tutorials/riot-compilation/)
 4. Complete all tutorials about RIOT on [iot-lab](https://www.iot-lab.info/tutorials/): Networking, Public IPv6, MQTT-SN.
 
-My SSH credential is: 
+Login with SSH in your remote machine: 
 ```s
 ssh colasant@grenoble.iot-lab.info
 ```
-To build: *(into your SSH remote connection, after have configured as (3))*
+To build: *(into your SSH remote connection, after have done (1,2,3,4))*
 ```sh
     source /opt/riot.source
     BOARD=iotlab-m3 make all
+    iotlab-experiment submit -n riot_m3 -d 60 -l 1,archi=m3:at86rf231+site=saclay
+    iotlab-experiment get -i <exp_id> -r
+    iotlab-node --update <your_binary>.elf -l saclay,m3,<dev_id>
+    nc <dev_id> 20000
 ```
+In the previous example I am using `M3` devices. If you want to use `a8-m3` devices, the steps are different, check [iot-lab tutorials](https://www.iot-lab.info/tutorials/)
 
 ## IoT-LAB Networking example for M3 Nodes
 1. Connect to SSH
@@ -122,9 +127,9 @@ Example: `node-a8-101.saclay.iot-lab.info` will have `2001:660:3207:0465::/64` a
 
 - `miniterm.py` is bugged on `2019.01` branch.  In the new version `2020.01` has been fixed, you can avoid using the `-e` parameter.
 
-- Check the my Hands-on [tips](hands-on) about RIOT tutorials.
+- Check the my Hands-on [tips](hands-on.md) about RIOT tutorials.
 
-- if you have problems contact me on [Linkedin](https://www.linkedin.com/in/francesco-colasante/)s or open a new issue. 
+- if you have problems contact me on [Linkedin](https://www.linkedin.com/in/francesco-colasante/) or open a new issue. 
 
 
 Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
