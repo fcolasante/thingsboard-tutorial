@@ -1,5 +1,5 @@
 #  Build IoT device using RIOT-OS, MQTT and Thingsboard
-
+- Check the previous [guide](README.md).
 - Watch my video on [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
 - Read my [article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
 
