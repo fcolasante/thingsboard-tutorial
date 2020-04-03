@@ -131,4 +131,4 @@ Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetO
 
 
 - [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
-- [Medium](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
+- [Medium article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
