@@ -25,6 +25,8 @@ Then, run the MQTT-SN transparent gateway and the MQTT broker.
 
 
 ## Run Gateway and broker
+
+### Mosquitto as bridge
 Update `bridge_gateway_prof.conf` with your parameters and run int. You need to setup:
 - `address` 
 - `remote_username` 
@@ -33,6 +35,8 @@ Update `bridge_gateway_prof.conf` with your parameters and run int. You need to 
 mosquitto -c brokers/conf/bridge_gateway_prod.conf 
 ```
 
+## Paho MQTT-sn
+It performs as MQTT-SN broker (RIOT devices connect to him) and as MQTT-SN -MQTT transparent gateway.
 
 Setup custom `gateway.conf`file:
 ```s
@@ -95,8 +99,8 @@ To build: *(into your SSH remote connection, after have configured as (3))*
 
 ## IoT-LAB Networking example for M3 Nodes
 1. Connect to SSH
-2. Compible the firmware in remote (in your SSH connection)
-3. Copy the remote elf into your local pc. 
+2. Compile the firmware in remote (in your SSH connection)
+3. Copy the remote `elf` into your local pc if you want to use iot-lab web interface.
 ```s
 scp colasant@grenoble.iot-lab.info:iot-lab/parts/RIOT/examples/gnrc_networking/bin/iotlab-m3/gnrc_networking.elf gnrc_networking.elf
 ```
