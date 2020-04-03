@@ -14,7 +14,7 @@ git submodule update --init --recursive
 2. Setup `RIOT`. Follow the official [Getting Started](https://github.com/RIOT-OS/Tutorials/blob/master/README.md)
 
 
-3. Setup `RIOTBASE ?= ...` into `Makefile`
+3. Setup `RIOTBASE ?= ...` into  the `device/riot/sensors_mqtttsn/Makefile`
 
 ## Setup virtual network
 ```s
@@ -25,10 +25,14 @@ Then, run the MQTT-SN transparent gateway and the MQTT broker.
 
 
 ## Run Gateway and broker
+Update `bridge_gateway_prof.conf` with your parameters and run int. You need to setup:
+- `address` 
+- `remote_username` 
 
 ```s
 mosquitto -c brokers/conf/bridge_gateway_prod.conf 
 ```
+
 
 Setup custom `gateway.conf`file:
 ```s
@@ -38,7 +42,7 @@ mv gateway.conf gateway.conf.bkp
 cp ../conf/MQTTSN-Gateway.conf gateway.conf
 ```
 
-Then, run the MQTT-SN transparent gateway:
+Then, run the MQTT-SN MQTT transparent gateway:
 ```s
 cd  brokers/MQTTSN-Gateway
 ./MQTT-SNGateway
@@ -57,6 +61,10 @@ con fec0:affe::1 1885
 set_device "Device Piano"
 pub_telemetry
 ```
+you can also use:
+```s
+pub v1/gateway/telemetry "{ 'Device Piano': [ { 'ts': 1585744760000, 'values':{'humidity': 42 }}]}" 1
+```
 
 
 ### Other utilities
@@ -67,10 +75,6 @@ sudo netstat -ltup
 mosquitto_pub -d -h "127.0.0.1" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -f "telemetry-data-as-object.json"
 ```
 
-Into RIOT shell:
-```s
-pub v1/gateway/telemetry "{ 'Device Piano': [ { 'ts': 1585744760000, 'values':{'humidity': 42 }}]}" 1
-```
 
 # IoT-LAB
 
