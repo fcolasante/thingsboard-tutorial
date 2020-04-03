@@ -3,6 +3,8 @@
 - Watch my video on [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
 - Read my [article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
 
+## Architecture
+![IoT architecture with MQTT-SN](https://miro.medium.com/max/1000/1*ZxxghBwu89XkaN-rAqwFIQ.png)
 
 1. Pull the repository:
 ```s
@@ -75,6 +77,7 @@ pub v1/gateway/telemetry "{ 'Device Piano': [ { 'ts': 1585744760000, 'values':{'
 1. Register to IoT-Lab. (*Replace*  `colasant` *with your iot-lab username*) 
 2. Configure SSH Access [link](https://www.iot-lab.info/tutorials/ssh-access/). Just create a pair key and copy your public key into your IoT-lab profile.
 3. Follow this [tutorial (riot-compilation)](https://www.iot-lab.info/tutorials/riot-compilation/)
+4. Complete all tutorials about RIOT on [iot-lab](https://www.iot-lab.info/tutorials/): Networking, Public IPv6, MQTT-SN.
 
 My SSH credential is: 
 ```s
@@ -82,8 +85,8 @@ ssh colasant@grenoble.iot-lab.info
 ```
 To build: *(into your SSH remote connection, after have configured as (3))*
 ```sh
-source /opt/riot.source
-BOARD=iotlab-m3 make all
+    source /opt/riot.source
+    BOARD=iotlab-m3 make all
 ```
 
 ## IoT-LAB Networking example for M3 Nodes
@@ -96,9 +99,21 @@ scp colasant@grenoble.iot-lab.info:iot-lab/parts/RIOT/examples/gnrc_networking/b
 
 
 # Issues
-Commonn errors:
-- SSH configuration
+Common errors:
+- If you cannot connect to the nodes due to SSH configuration: (*make sure that you have also copied your private key*)
 ```s
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ```
+- `lps331ap`sensors are not available on M3 subsystem of A8 device. (It works only on M3).
+
+- When you are performing networking tutorials, pay attention to the subnets you propagate. Consult the official (documentation)[https://www.iot-lab.info/tutorials/understand-ipv6-subnetting-on-the-fit-iot-lab-testbed/].
+
+Example: `node-a8-101.saclay.iot-lab.info` will have `2001:660:3207:0465::/64` as `	/64 subnet on M3 interface`.
+
+
+- `miniterm.py` is bugged on `2019.01` branch.  In the new version `2020.01` has been fixed, you can avoid using the `-e` parameter.
+
+- Check the my Hands-on (tips)[hands-on] about RIOT tutorials.
+
+- if you have problems contact me on (Linkedin)[https://www.linkedin.com/in/francesco-colasante/] or open a new issue. 

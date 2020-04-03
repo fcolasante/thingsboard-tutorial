@@ -108,3 +108,14 @@ Check CONNECTION:
 sudo netstat -ltup
 ```
 
+## Iot-Lab Networking
+BORDER ROUTER:
+```S
+iotlab-node --update examples/gnrc_border_router/bin/iotlab-m3/gnrc_border_router.elf -l saclay,m3,106
+sudo ethos_uhcpd.py m3-106 tap0 2001:660:5307:316a::1/64
+```
+
+```s
+cd ~/A8/riot/RIOT/examples/my_firmware/bin/iotlab-m3
+iotlab-node --update emcute_mqttsn.elf -l grenoble,m3,105
+```
