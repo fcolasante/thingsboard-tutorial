@@ -150,3 +150,5 @@ It provides:
 - riot firmware
 - MQTT-SN configuration
 - iot-lab hands-on
+
+Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.

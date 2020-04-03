@@ -115,7 +115,7 @@ ssh-add ~/.ssh/id_rsa
 ```
 - `lps331ap`sensors are not available on M3 subsystem of A8 device. (It works only on M3).
 
-- When you are performing networking tutorials, pay attention to the subnets you propagate. Consult the official [documentation]/(https://www.iot-lab.info/tutorials/understand-ipv6-subnetting-on-the-fit-iot-lab-testbed/).
+- When you are performing networking tutorials, pay attention to the subnets you propagate. Consult the official [documentation](https://www.iot-lab.info/tutorials/understand-ipv6-subnetting-on-the-fit-iot-lab-testbed/).
 
 Example: `node-a8-101.saclay.iot-lab.info` will have `2001:660:3207:0465::/64` as `	/64 subnet on M3 interface`.
 
@@ -124,4 +124,11 @@ Example: `node-a8-101.saclay.iot-lab.info` will have `2001:660:3207:0465::/64` a
 
 - Check the my Hands-on [tips](hands-on) about RIOT tutorials.
 
-- if you have problems contact me on (Linkedin)[https://www.linkedin.com/in/francesco-colasante/] or open a new issue. 
+- if you have problems contact me on [Linkedin](https://www.linkedin.com/in/francesco-colasante/)s or open a new issue. 
+
+
+Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
+
+
+- [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
+- [Medium](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
