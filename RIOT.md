@@ -115,13 +115,13 @@ ssh-add ~/.ssh/id_rsa
 ```
 - `lps331ap`sensors are not available on M3 subsystem of A8 device. (It works only on M3).
 
-- When you are performing networking tutorials, pay attention to the subnets you propagate. Consult the official (documentation)[https://www.iot-lab.info/tutorials/understand-ipv6-subnetting-on-the-fit-iot-lab-testbed/].
+- When you are performing networking tutorials, pay attention to the subnets you propagate. Consult the official [documentation]/(https://www.iot-lab.info/tutorials/understand-ipv6-subnetting-on-the-fit-iot-lab-testbed/).
 
 Example: `node-a8-101.saclay.iot-lab.info` will have `2001:660:3207:0465::/64` as `	/64 subnet on M3 interface`.
 
 
 - `miniterm.py` is bugged on `2019.01` branch.  In the new version `2020.01` has been fixed, you can avoid using the `-e` parameter.
 
-- Check the my Hands-on (tips)[hands-on] about RIOT tutorials.
+- Check the my Hands-on [tips](hands-on) about RIOT tutorials.
 
 - if you have problems contact me on (Linkedin)[https://www.linkedin.com/in/francesco-colasante/] or open a new issue. 
