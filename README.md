@@ -142,13 +142,35 @@ Read my article and see the video in order to have a better view of this project
 - [Medium article](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
 
 
-# Next tutorial
+# Tutorial 2 
 
-Check the next tutorial available at [link](RIOT.md).
+Check the Tutorial #2 available at [link](RIOT.md).
+
+- [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
+- [Medium article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
 
 It provides:
 - riot firmware
 - MQTT-SN configuration
 - iot-lab hands-on
 
+
+# Tutorial 3
+Check the Tutorial #3 available at [link](LoRaWAN.md).
+
+- [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
+- [Medium article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
+
+It provides:
+- LoRaWAN connection
+- TheThingsNetwork getting started
+- MQTT gateway 
+- iot-lab testbed
+
+
+
+
+
+
 Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
+
