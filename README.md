@@ -142,12 +142,12 @@ Read my article and see the video in order to have a better view of this project
 - [Medium article](https://medium.com/@colasante.francesco/how-to-setup-an-iot-system-using-thingsboard-b705c9189e37)
 
 
-# Tutorial 2 
+## Tutorial 2 
 
 Check the Tutorial #2 available at [link](RIOT.md).
 
-- [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
-- [Medium article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
+- [YouTube video](https://www.youtube.com/watch?v=MPbuNmr0FjI)
+- [Medium blogpost](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
 
 It provides:
 - riot firmware
@@ -155,11 +155,11 @@ It provides:
 - iot-lab hands-on
 
 
-# Tutorial 3
+## Tutorial 3
 Check the Tutorial #3 available at [link](LoRaWAN.md).
 
-- [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
-- [Medium article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
+- [YouTube video](https://www.youtube.com/watch?v=MPbuNmr0FjI)
+- [Medium blogpost](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
 
 It provides:
 - LoRaWAN connection
