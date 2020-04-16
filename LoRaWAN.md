@@ -6,7 +6,7 @@
 
 
 ## Architecture
-![IoT architecture with MQTT-SN](https://cdn-images-1.medium.com/max/800/1*Wpt6eyg_YSJCJVPZgwxG5A.png)
+![IoT architecture with MQTT-SN](https://cdn-images-1.medium.com/max/1200/1*c4_iS8ATS3ksWUJBl99i7g.png)
 
 ## Requirements 
 - RIOT
@@ -22,13 +22,13 @@ This is the device that we will use on the iot-lab, you do not need to buy it
 
 
 First of all, you need to `git pull` or `clone` this repository.
-*If you have not done it yet, I suggest you do it.*
+*If you have not done the previous tutorials, I suggest you do it.*
 
 In this tutorial, you will use this 2 folders:
 - `device/riot/sensors_lora`
 - `brokers/TTN_BT_Gateway`
 
-The other folders are useful for previous tutorials
+The other folders are useful for previous tutorials.
 ## Setup TTN
 
 1. Create an account on [TheThingsNetwork](https://account.thethingsnetwork.org/register)
@@ -49,8 +49,12 @@ function Decoder(bytes, port) {
 }
 ```
 
+## Setup Thingsboard
+1. Access to Thingsboard and create a new Gateway. 
+2. Keep note of the `ACCESS_TOKEN`. You will use it later.
 
-## IoT-LAB
+
+## Test on IoT-LAB
 
 1. Access to `saclay`: `ssh <username>@saclay.iot-lab.info`
 2. Clone RIOT repository (already done see Tutorial 2)
@@ -59,7 +63,7 @@ function Decoder(bytes, port) {
 cd ~/RIOT
 source /opt/riot.source
 export PATH=/opt/gcc-arm-none-eabi-7-2017-q4-major/bin:$PATH
-arm-none-eabi-gcc --version # to check wheter is 7.x
+arm-none-eabi-gcc --version 
 mkdir ~/RIOT/examples/mylorawan
 ```
 4. Config your custom TTN params into `Makefile` and `main.c`
@@ -103,7 +107,7 @@ nc st-lrwan1-<dev_id> 20000
 
 Now your device is running
 
-## Transparent Gateway
+## Run Transparent Gateway
 1. Setup your secrets data in `mysecrets.example.py` and then:
 Edit:
 `mysecrets.py`:
@@ -130,8 +134,8 @@ If you have some problem, I suggest you to do this tutorial on [IoT-LAB](https:/
 Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
 
 
-- [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
-- [Medium article](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
+- [YouTube](https://youtu.be/mMJN9AqVCzI)
+- [Medium article](https://medium.com/@colasante.francesco/3-how-to-connect-an-iot-device-to-thingsboard-using-lorawan-the-thingsnetwork-and-riot-os-46ce20dc7d5b?sk=a74c2984c610f701e5035f5acff2643b)
 
 
 

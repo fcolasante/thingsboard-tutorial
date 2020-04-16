@@ -92,8 +92,6 @@ void get_payload(char* message){
                 "wind_intensity", get_rnd(MIN_WIND_INTENSITY, MAX_WIND_INTENSITY),
                 "rain_height", get_rnd(MIN_RAIN_HEIGHT, MAX_RAIN_HEIGHT)
             );
-    
-    //snprintf(message, MSG_LEN, "{ 'Device Piano': [ { 'ts': 1585744760000, 'values':{'humidity': %d }}]}", rand());
 }
 
 

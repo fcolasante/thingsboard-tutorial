@@ -158,8 +158,10 @@ It provides:
 ## Tutorial 3
 Check the Tutorial #3 available at [link](LoRaWAN.md).
 
-- [YouTube video](https://www.youtube.com/watch?v=MPbuNmr0FjI)
-- [Medium blogpost](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7)
+- [YouTube](https://youtu.be/mMJN9AqVCzI)
+- [Medium article](https://medium.com/@colasante.francesco/3-how-to-connect-an-iot-device-to-thingsboard-using-lorawan-the-thingsnetwork-and-riot-os-46ce20dc7d5b?sk=a74c2984c610f701e5035f5acff2643b)
+
+
 
 It provides:
 - LoRaWAN connection
@@ -168,9 +170,5 @@ It provides:
 - iot-lab testbed
 
 
-
-
-
-
-Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
+Tutorials of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
 

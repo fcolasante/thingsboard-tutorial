@@ -36,6 +36,7 @@ def on_subscribe(client, userdata, mid, granted_qos) :
     
 def on_message(client, userdata, message) :
     generic_payload = json.loads(message.payload)       # Capturing the message arrived on TTN Topic
+    print(generic_payload)
     data = base64.b64decode(generic_payload['payload_raw']).decode('utf-8')
     ts = int(time.time()*1000) # timestamp with 13 digits
     data = data.replace("<timestamp>", str(ts))
