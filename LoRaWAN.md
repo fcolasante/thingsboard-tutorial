@@ -1,8 +1,8 @@
 # How to connect an IoT device to Thingsboard using LoRaWAN, The ThingsNewtwork and RIOT-OS
 - Check the previous guides: tutorial [1](README.md), tutorial [2](RIOT.md)
 
-- Watch my video on [YouTube](https://www.youtube.com/watch?v=MPbuNmr0FjI)
-- Read my [blogpost](https://medium.com/@colasante.francesco/2-how-to-develop-an-iot-device-connected-to-thingsboard-using-riot-os-and-mqtt-sn-c4ccbe40dae7) on Medium
+- Watch my video on [YouTube](https://youtu.be/mMJN9AqVCzI)
+- Read my [blog-post](https://medium.com/@colasante.francesco/3-how-to-connect-an-iot-device-to-thingsboard-using-lorawan-the-thingsnetwork-and-riot-os-46ce20dc7d5b?sk=a74c2984c610f701e5035f5acff2643b) on Medium
 
 
 ## Architecture
@@ -53,6 +53,7 @@ function Decoder(bytes, port) {
 1. Access to Thingsboard and create a new Gateway. 
 2. Keep note of the `ACCESS_TOKEN`. You will use it later.
 
+![gateway](https://miro.medium.com/max/756/1*tvjyHLgLsF_Hb6-o4nbuCQ.png)
 
 ## Test on IoT-LAB
 
@@ -124,7 +125,7 @@ mv mysecrets.example.py myscrets.py
 
 ## Check Thingsboard dashboard
 
-
+![Dashboard](https://miro.medium.com/max/2000/1*ExLTY1bL1dLXUDPk9GLO8A.png)
 ## Helps
 If you have some problem, I suggest you to do this tutorial on [IoT-LAB](https://www.iot-lab.info/tutorials/riot-ttn/)
 
