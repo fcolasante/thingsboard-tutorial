@@ -6,11 +6,29 @@
 
 
 ## Architecture
+![IoT architecture with MQTT-SN](https://cdn-images-1.medium.com/max/800/1*Wpt6eyg_YSJCJVPZgwxG5A.png)
+
+## Requirements 
+- RIOT
+- IoT-LAB
+- TheThingsNetwork (TTN)
+- Thingsboard
+- Paho MQTT library
+- LoRaWAN
+
+### Hardware
+This is the device that we will use on the iot-lab, you do not need to buy it
 - b-l072z-lrwan1 [documentation](https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html)
 
-## LoRaWAN
 
+First of all, you need to `git pull` or `clone` this repository.
+*If you have not done it yet, I suggest you do it.*
 
+In this tutorial, you will use this 2 folders:
+- `device/riot/sensors_lora`
+- `brokers/TTN_BT_Gateway`
+
+The other folders are useful for previous tutorials
 ## Setup TTN
 
 1. Create an account on [TheThingsNetwork](https://account.thethingsnetwork.org/register)
@@ -32,12 +50,9 @@ function Decoder(bytes, port) {
 ```
 
 
-
-
-
 ## IoT-LAB
 
-1. Access to `saclay`
+1. Access to `saclay`: `ssh <username>@saclay.iot-lab.info`
 2. Clone RIOT repository (already done see Tutorial 2)
 3. Setup `gcc compiler`
 ```s
@@ -61,11 +76,10 @@ Replace `device_teramo` with your Thingsboard device name.
 //END CUSTOM PARAMS
 ```
 
-5. Copy RIO firmware using `scp`.
+5. Copy RIOT firmware using `scp` (from your pc to IoT-LAB).
 ```s
 cd device/riot
 scp sensors_lora/* colasant@saclay.iot-lab.info:~/RIOT/examples/mylorawan
-
 ```
 5. Compile your riot-firmware
 ```
