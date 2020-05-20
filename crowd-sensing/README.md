@@ -18,7 +18,14 @@ The LinearAccelerationSensor measures acceleration that is applied to the device
 
 ## Activity recognition Model
 After reading several papers about Human Activity recognition (HRA) [1](https://www.researchgate.net/publication/224144663_Human_Activity_Recognition_via_an_Accelerometer-Enabled-Smartphone_Using_Kernel_Discriminant_Analysis) [2](https://www.researchgate.net/publication/279852352_Improving_classification_of_sit_stand_and_lie_in_a_smartphone_human_activity_recognition_system) I decided to use to build a simple model (PoC) using the Linear acceleration sensor sampling at 1 Hz, creating a 4 sampling window and analyzing two features:
-
+```js
+let l_sma = data.map(val => val.x + val.y + val.z).reduce( (acc, val) => acc + val);
+l_sma /= win;
+let tmp = data.map( val => val.x + val.y + val.z - l_sma ).map( x => Math.pow(x, 2));
+let sosd = tmp.reduce( (acc, val) => acc + val);
+sosd /= win;
+sosd = Math.sqrt(sosd);
+```
 
 ## Deployment
 As already mentioned in the introduction, I created two different versions:
