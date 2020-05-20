@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cloud based Human Activity Recognition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Francesco Colasante">
+    <meta name="description" content="Iot Assignment crowd sensing">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+
+<body>
+    
+    <h7>Your local IP address is: </h7>
+    <h7 id="ip"> ip address</h7>
+    <script type="application/javascript">
+        function getIP(json) {
+            let ip = document.getElementById("ip");
+            ip.innerHTML = json.ip;
+        }
+    </script>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Crowd sensing</h1>
+      <small>Francesco Colasante</small>
+    </div>
+  </div>
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+    <div class="card">
+        <div class="card-header">
+            Cloud based 
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Linear Accelerometer raw data</h5>
+          <p ></p>
+          <div class="card-text" id="lad">No data</div>
+          <div class="progress">
+              <div id="x" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="100"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress">
+              <div id="y" class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="100"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress">
+              <div id="z" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="100"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+      
+          <a href="https://demo.thingsboard.io:/dashboard/b61584a0-9466-11ea-9a66-358c6522b855?publicId=d2ff5950-6a96-11ea-8e0a-7d0ef2a682d3"" 
+          class="btn btn-primary">Live Dashboard</a>
+        </div>
+      </div>
+
+    <div class="embed-responsive embed-responsive-4by3">
+        <iframe class="embed-responsive-item"
+            src="https://demo.thingsboard.io/dashboard/fffdb510-994d-11ea-8945-557a14320ccf?publicId=c81c0600-994e-11ea-8945-557a14320ccf"
+            allowfullscreen></iframe>
+        </iframe>
+    </div>
+    Console Log:
+    <div id="cnsl" class="alert alert-dark" style="height: 100px;" role="alert">
+    </div>
+    <script>
+        /*REPLACE ACCESS_TOKEN with yours. 
+        This is a private info and it should be not stored in Git.
+         */
+        let access_token = 'qD0VYMtFyBPNCDj2Kol4';
+        let lad = document.getElementById('lad');
+        let stat = document.getElementById('stat');
+        let ip = document.getElementById('ip').innerHTML;
+        let cnsl = document.getElementById('cnsl');
+        let x = document.getElementById('x');
+        let y = document.getElementById('y');
+        let z = document.getElementById('z');
+
+        /* functions used to print on HTML */
+        function print(text, append = true) {
+            if (append)
+                cnsl.innerHTML += text;
+            else
+                cnsl.innerHTML = text;
+        }
+        print("Console is ready");
+
+        if ('LinearAccelerationSensor' in window) {
+
+            let las = new LinearAccelerationSensor({ frequency: 1 });
+            las.addEventListener('reading', (la) => {
+                //all stuff there
+            });
+            las.addEventListener('error', event =>{
+                //check errors
+            })
+            las.start();
+        }
+
+        if ('LinearAccelerationSensor' in window) {
+            let win = 4;
+            let data = [];
+            let i = 0;
+
+            //initialize sensor with frequency 1Hz
+            let las = new LinearAccelerationSensor({ frequency: 1 });
+            las.addEventListener('reading', function (la) {
+                //change values on progress bar
+                x.style.width = la.target.x * 100 + "%";
+                y.style.width = la.target.y * 100 + "%";
+                z.style.width = la.target.z * 100 + "%";
+                lad.innerHTML = 'x: ' + la.target.x + '<br> y: ' + la.target.y + '<br> z: ' + la.target.z;
+                //print('x: ' + la.target.x + '<br> y: ' + la.target.y + '<br> z: ' + la.target.z);
+
+                if (i < win) {
+                    //save values in array
+                    data[i] = { x: Math.abs(la.target.x), y: Math.abs(la.target.y), z: Math.abs(la.target.z) };
+                    i++;
+                    print(i);
+                } else {
+                    //build payload and send using HTTP-POST
+                    let payload = {
+                        ip: ip,
+                        data: data
+                    };
+                    let msg = JSON.stringify(payload);
+                    print(msg);
+                    
+                    const Http = new XMLHttpRequest();
+                    const url = `https://demo.thingsboard.io/api/v1/${access_token}/telemetry`;
+                    Http.open("POST", url);
+                    Http.send(msg);
+                    Http.onreadystatechange = (e) => {
+                        print(Http.responseText, false)
+                    }
+                    //restart the time window
+                    i = 0;
+                    data[i]({ x: Math.abs(la.target.x), y: Math.abs(la.target.y), z: Math.abs(la.target.z) });
+                }
+            });
+            //start sensor
+            las.start();
+        }
+        //error messgae
+        else lad.innerHTML = 'Linear Accelerometer not supported';
+    </script>
+</body>
+</html>

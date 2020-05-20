@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edge based Human Activity Recognition</title>  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Francesco Colasante">
+  <meta charset="UTF-8">
+  <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+<body>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Crowd sensing</h1>
+      <small>Francesco Colasante</small>
+    </div>
+  </div>
+  <h7>Your local IP address is: </h7>
+  <h7 id="ip"> ip address</h7>
+  <!--Get device public ip address -->
+  <script type="application/javascript">
+  function getIP(json) {
+    let ip = document.getElementById("ip");
+    ip.innerHTML = json.ip;
+  }
+  </script>
+  <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+  <div class="card">
+    <div class="card-header">
+        Edge-based 
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Linear Accelerometer raw data</h5>
+      <p ></p>
+      <div class="card-text" id="lad">No data</div>
+      <div class="progress">
+          <div id="x" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="100"
+              aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div class="progress">
+          <div id="y" class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="100"
+              aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div class="progress">
+          <div id="z" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="100"
+              aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div id="k"> Can't compute standard deviation</div>
+      <div id="stat" class="alert alert-success" role="alert">
+        Waiting for data
+      </div>
+
+      <a href="https://demo.thingsboard.io:/dashboard/b61584a0-9466-11ea-9a66-358c6522b855?publicId=d2ff5950-6a96-11ea-8e0a-7d0ef2a682d3"" 
+      class="btn btn-primary">Live Dashboard</a>
+    </div>
+  </div>
+
+<div class="embed-responsive embed-responsive-4by3">
+    <iframe class="embed-responsive-item"
+        src="https://demo.thingsboard.io:/dashboard/7c023c00-99ab-11ea-ba29-93c92b718da1?publicId=c81c0600-994e-11ea-8945-557a14320ccf"
+        allowfullscreen></iframe>
+    </iframe>
+</div>
+Console Log:
+<div id="cnsl" class="alert alert-dark" style="height: 100px;" role="alert">
+</div>
+
+  <script>
+    let lad = document.getElementById('lad');
+    let x = document.getElementById('x');
+    let y = document.getElementById('y');
+    let z = document.getElementById('z');
+    let k = document.getElementById('k');
+    let stat = document.getElementById('stat');
+    let ip = document.getElementById('ip').innerHTML;
+
+    let cnsl = document.getElementById('cnsl');
+    function print(text, append = true) {
+            if (append)
+                cnsl.innerHTML += text + '<br>';
+            else
+                cnsl.innerHTML = text;
+        }
+    print("Console is ready");
+
+    //thingsboard device access token
+    let token = "BApw7f9Vxs5AhofNrRdf";
+
+    //check sensor on device
+    if ( 'LinearAccelerationSensor' in window ) {
+      //a window is formed by 4 relevation 
+      let win = 4;
+
+      //array for saving retrived data locally
+      let data = [];
+
+      let i = 0;
+
+      //initialize sensor with frequency 1Hz
+      let las = new LinearAccelerationSensor({frequency: 1});
+      //function exectued at each detection
+      las.addEventListener('reading', function(la) {
+        // write values on html page
+        x.style.width = la.target.x*100 + "%";
+        y.style.width = la.target.y*100 + "%";
+        z.style.width = la.target.z*100 + "%";
+
+        lad.innerHTML = 'x: ' + la.target.x + '<br> y: ' + la.target.y + '<br> z: ' + la.target.z;
+        print('x: ' + la.target.x + '<br> y: ' + la.target.y + '<br> z: ' + la.target.z);
+        if(i<win){
+          //save values in the arrays
+          data[i] = { x: Math.abs(la.target.x), y: Math.abs(la.target.y), z: Math.abs(la.target.z) };
+          i++;
+        }else{
+          //compute standard deviation
+          let j;
+          print("Calculating data", false);
+          print("Data" + JSON.stringify(data));
+          //l_sma = 1/win * sum(x_i+y_i+z_i)
+          let l_sma = data.map(val => val.x + val.y + val.z).reduce( (acc, val) => acc + val);
+          l_sma /= win;
+          print("LSMA:" + JSON.stringify(l_sma));
+          let tmp = data.map( val => val.x + val.y + val.z - l_sma ).map( x => Math.pow(x, 2));
+          let sosd = tmp.reduce( (acc, val) => acc + val);
+          print("sosd:" + sosd);
+          sosd /= win;
+          sosd = Math.sqrt(sosd);
+          //print standard deviation on html page
+          k.innerHTML = "standard deviation: " + sosd;
+
+          //empirical treshold for standard deviation is 0.5
+          if(sosd<0.5){
+            stat.innerHTML = "Still";
+            stat.className = 'alert alert-danger'
+          }
+          else{
+            stat.innerHTML = "Moving";
+            stat.className = 'alert alert-success'
+          }
+
+          //cerate message to be sent 
+          let msg = `{\"user\":${ip},\"status\":\"${stat.innerHTML}\"}`;
+          console.log("msg"+msg);
+
+          //TODO: send the message
+
+          const Http = new XMLHttpRequest();
+          const url= `https://demo.thingsboard.io/api/v1/${token}/telemetry`;
+          Http.open("POST",url);
+          Http.send(msg);
+
+          //restert the loop
+          i=0;
+          data[i] = { x: Math.abs(la.target.x), y: Math.abs(la.target.y), z: Math.abs(la.target.z) };
+        }
+      });
+      //start the sensor
+      las.start();
+    }
+
+    //error messgae
+    else lad.innerHTML = 'Linear Accelerometer not supported';
+  </script>
+</body>
+</html>

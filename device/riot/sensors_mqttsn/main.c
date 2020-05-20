@@ -33,7 +33,7 @@
 #include "thread.h"
 #include "xtimer.h"
 
-#define SENSORS 1
+#define SENSORS 0
 #define UNUSED(x) (void)(x)
 
 #if SENSORS
