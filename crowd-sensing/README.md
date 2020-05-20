@@ -1,5 +1,5 @@
 # Crowd sensing
-- Check the previous guides: tutorial [1](README.md), tutorial [2](RIOT.md) 
+- Check the previous guides: tutorial [1](../README.md), tutorial [2](../RIOT.md), tutorial [3](../LoRaWAN.md)
 - Watch my video on [YouTube](https://youtu.be/p3gq2VLTSiI)
 - Read my [blog-post](https://medium.com/@colasante.francesco/4-how-to-create-a-crowd-sensing-application-using-generic-sensor-api-and-javascript-47e3ff1df49e) on Medium
 
@@ -11,3 +11,40 @@ The LinearAccelerationSensor measures acceleration that is applied to the device
 
 ## Activity recognition Model
 After reading several papers about Human Activity recognition (HRA) [1] [2] I decided to use to build a simple model (PoC) using the Linear acceleration sensor sampling at 1 Hz, creating a 4 sampling window and analyzing two features:
+
+
+## Deployment
+As already mentioned in the introduction, I created two different versions:
+- cloud-deployment: the page sends the raw data to Thingsboard, processes it through the HRA model and outputs the prediction. [Link]
+- edge-deployment: the page processes the model locally using Javascript, from the prediction as output and sends the prediction and raw data to Thingsboard which saves them and also providing dashboards.
+
+## Thingsboard
+Thingsboard
+Now it’s time to set up Thingsboard. In this tutorial I used the Thingsboard live demo, but I remember that it is also possible to user Docker or host your instance on Digital Ocean as I showed in the previous tutorials.
+First of all, create 2 new devices, copy the access token and insert it in the Javascript code respectively for edge and cloud deployment.
+After this, you need to edit the default rule chain. In order to compute the data only in the case of cloud deployment we have to intercept only those packages. To do this the following command helps us.
+
+```html
+    <script>
+        /*REPLACE ACCESS_TOKEN with yours. 
+        This is a private info and it should be not stored in Git.
+         */
+        let access_token = 'AAAAAMtFyBPNCDj2Kol4';
+        let lad = document.getElementById('lad');
+        let stat = document.getElementById('stat');
+    ...
+```
+This is the code to send telemetry on Thingsboard:
+```js
+    const Http = new XMLHttpRequest();
+    const url = `https://demo.thingsboard.io/api/v1/${access_token}/telemetry`;
+    Http.open("POST", url);
+    Http.send(msg);
+```
+# Details
+
+Tutorial of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
+
+
+- [YouTube](https://youtu.be/p3gq2VLTSiI)
+- [Medium article](https://medium.com/p/4-how-to-create-a-crowd-sensing-application-using-generic-sensor-api-and-javascript-47e3ff1df49e?source=email-b3e30a097b41--writer.postDistributed&sk=67c5c558f0f9e451caeb1b293bb06767)
