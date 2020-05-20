@@ -169,6 +169,20 @@ It provides:
 - MQTT gateway 
 - iot-lab testbed
 
+## Tutorial 4
+Check the Tutorial #3 available at [link](crowd-sensing/README.md).
+
+- [YouTube](https://youtu.be/p3gq2VLTSiI)
+- [Medium article](https://medium.com/@colasante.francesco/4-how-to-create-a-crowd-sensing-application-using-generic-sensor-api-and-javascript-47e3ff1df49e)
+
+
+It provides:
+- Crowd sensing
+- Human recognition activity
+- Generic Sensor API
+- Thingsboard Dashboard
+- HTML5 + Javascript web application
+- cloud / edge architecture
 
 Tutorials of the [Internet of Things course 2020](http://ichatz.me/Site/InternetOfThings2020), part of the MSc on Computer Engineering, Department of Computer, Control and Management Engineering (DIAG), Sapienza University of Rome.
 

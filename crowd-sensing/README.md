@@ -1,7 +1,7 @@
 # Crowd sensing
-- Check the previous guides: tutorial [1](README.md), tutorial [2](RIOT.md)
-- Watch my video on [YouTube](https://youtu.be/mMJN9AqVCzI)
-- Read my [blog-post](https://medium.com/@colasante.francesco/3-how-to-connect-an-iot-device-to-thingsboard-using-lorawan-the-thingsnetwork-and-riot-os-46ce20dc7d5b?sk=a74c2984c610f701e5035f5acff2643b) on Medium
+- Check the previous guides: tutorial [1](README.md), tutorial [2](RIOT.md) 
+- Watch my video on [YouTube](https://youtu.be/p3gq2VLTSiI)
+- Read my [blog-post](https://medium.com/@colasante.francesco/4-how-to-create-a-crowd-sensing-application-using-generic-sensor-api-and-javascript-47e3ff1df49e) on Medium
 
 # Architecture
 ![Crowd sensing](https://cdn-images-1.medium.com/max/1200/1*MmoSdsb-oU7MYuFq9tXBZA.png)
