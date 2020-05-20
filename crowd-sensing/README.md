@@ -10,7 +10,7 @@
 The LinearAccelerationSensor measures acceleration that is applied to the device hosting the sensor, excluding the contribution of a gravity force. When a device is at rest, for instance, lying flat on the table, the sensor would measure ≈ 0 m/s2 acceleration on three axes.
 
 ## Activity recognition Model
-After reading several papers about Human Activity recognition (HRA) [1] [2] I decided to use to build a simple model (PoC) using the Linear acceleration sensor sampling at 1 Hz, creating a 4 sampling window and analyzing two features:
+After reading several papers about Human Activity recognition (HRA) [1](https://www.researchgate.net/publication/224144663_Human_Activity_Recognition_via_an_Accelerometer-Enabled-Smartphone_Using_Kernel_Discriminant_Analysis) [2](https://www.researchgate.net/publication/279852352_Improving_classification_of_sit_stand_and_lie_in_a_smartphone_human_activity_recognition_system) I decided to use to build a simple model (PoC) using the Linear acceleration sensor sampling at 1 Hz, creating a 4 sampling window and analyzing two features:
 
 
 ## Deployment
